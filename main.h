@@ -22,5 +22,6 @@ void add_bin_prefix(char *argv[], char *new_arg);
 void interactive_mode(int bytes, int id,
 		char *input_buffer, char *argv_buffer[], char *new_arg);
 int _strlen(char *s);
+char *_strncpy(char *dest, char *src, int n);
 
 #endif
