@@ -35,7 +35,7 @@ void string_token(char *str, char *delimiter, char *argv[])
 				first_ptr++;
 			argv[argc++] = second_ptr;
 			second_ptr = first_ptr + 1;
-			if (argc >= 10)
+			if (argc >= MAX_INPUT_LENGTH)
 				break;
 		}
 		first_ptr++;
