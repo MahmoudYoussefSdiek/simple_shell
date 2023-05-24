@@ -7,12 +7,39 @@
  */
 int main(void)
 {
-	pid_t id;
+	pid_t id = 0;
 	ssize_t bytes = 0;
 	char input_buffer[MAX_INPUT_LENGTH];
 	char new_arg[20];
-	char *argv[MAXARGS];
+	char *argv_buffer[MAXARGS];
 
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		interactive_mode(bytes, id, input_buffer, argv_buffer, new_arg);
+	}
+	else
+	{
+		perror("stdin is not a tty");
+	}
+
+	return (0);
+}
+
+/**
+ * interactive_mode - function that handles
+ * a command from interactive mode.
+ *
+ * @bytes: number of bytes from reading line.
+ * @id: process id.
+ * @input_buffer: buffer that save input line.
+ * @argv_buffer: buffer that save arguments.
+ * @new_arg: full path command.
+ *
+ * Return: void.
+ */
+void interactive_mode(int bytes, int id,
+		char *input_buffer, char *argv_buffer[], char *new_arg)
+{
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
@@ -31,9 +58,9 @@ int main(void)
 		if (input_buffer[bytes - 1] == '\n')
 			input_buffer[bytes - 1] = '\0';
 
-		string_token(input_buffer, " ", argv);
-		add_bin_prefix(argv, new_arg);
-		if (argv[0] == NULL)
+		string_token(input_buffer, " ", argv_buffer);
+		add_bin_prefix(argv_buffer, new_arg);
+		if (argv_buffer[0] == NULL)
 			continue;
 
 		id = fork();
@@ -44,13 +71,11 @@ int main(void)
 		}
 		else if (id == 0)
 		{
-			execve(argv[0], argv, NULL);
+			execve(argv_buffer[0], argv_buffer, NULL);
 			perror("execve failed");
 			exit(EXIT_FAILURE);
 		}
 		else
 			wait(NULL);
 	}
-
-	return (0);
 }
