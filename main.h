@@ -19,8 +19,4 @@
 void string_token(char *str, char *delimiter, char *argv[]);
 void add_bin_prefix(char *argv[], char *new_arg);
 
-void eval(char *cmdline);
-int builtin_command(char **argv);
-char *search_path(char *file);
-
 #endif
