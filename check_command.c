@@ -17,14 +17,14 @@ void add_bin_prefix(char *argv[], char *new_arg)
 	if (argv[0] == NULL)
 		return;
 
-	prefix_len = strlen(prefix_path);
-	arg_len = strlen(argv[0]);
+	prefix_len = _strlen(prefix_path);
+	arg_len = _strlen(argv[0]);
 
-	if (strncmp(argv[0], prefix_path, prefix_len) == 0)
+	if (_strcmp(argv[0], prefix_path) == 0)
 		return;
 
-	strncpy(new_arg, prefix_path, prefix_len);
-	strncpy(new_arg + prefix_len, argv[0], arg_len);
+	_strncpy(new_arg, prefix_path, prefix_len);
+	_strncpy(new_arg + prefix_len, argv[0], arg_len);
 	new_arg[prefix_len + arg_len] = '\0';
 
 	argv[0] = new_arg;

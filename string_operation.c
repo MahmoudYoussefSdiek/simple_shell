@@ -17,7 +17,7 @@ int _strlen(char *s)
 	return (len);
 }
 
-#include "main.h"
+
 /**
  * _strncpy - function that copies a string
  * @dest: input value
@@ -26,7 +26,7 @@ int _strlen(char *s)
  *
  * Return: dest
  */
-char *_strncpy(char *dest, char *src, int n)
+void _strncpy(char *dest, char *src, int n)
 {
 	int a;
 
@@ -41,11 +41,9 @@ char *_strncpy(char *dest, char *src, int n)
 		dest[a] = '\0';
 		a++;
 	}
-
-	return (dest);
 }
 
-#include "main.h"
+
 /**
  * _strcmp - compare the string values
  * @s1: input value
