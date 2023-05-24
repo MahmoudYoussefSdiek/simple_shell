@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * add_bin_prefix - function that adds full path to command.
+ *
+ * @argv: array of arguments.
+ * @new_arg: full command.
+ *
+ * Return: void.
+ */
 void add_bin_prefix(char *argv[], char *new_arg)
 {
 	char *prefix_path = "/bin/";
