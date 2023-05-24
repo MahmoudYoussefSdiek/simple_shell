@@ -23,7 +23,6 @@ void interactive_mode(int bytes, int id,
 void non_interactive_mode(char *input_buffer,
 		char *argv_buffer[], char *new_arg);
 
-void read_line(int fd, char *input_buffer);
 
 int _strlen(char *s);
 void _strncpy(char *dest, char *src, int n);

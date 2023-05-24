@@ -16,8 +16,7 @@ void non_interactive_mode(char *input_buffer,
 	int id;
 	int bytes;
 
-	read_line(STDIN_FILENO, input_buffer);
-	bytes = _strlen(input_buffer);
+	bytes = read(STDIN_FILENO, input_buffer, MAX_INPUT_LENGTH);
 	if (input_buffer[bytes - 1] == '\n')
 		input_buffer[bytes - 1] = '\0';
 

@@ -1,33 +1,6 @@
 #include "main.h"
 
 /**
- * read_line - function that reads a line from file descriptor.
- *
- * @fd: file descriptor.
- * @input_buffer: buffer that save input line.
- *
- ' * Return: void.
- */
-void read_line(int fd, char *input_buffer)
-{
-	int c;
-	int i = 0;
-
-	while (1)
-	{
-		c = read(fd, &input_buffer[i], 1);
-
-		if (c == 0 || input_buffer[i] == '\n')
-		{
-			input_buffer[i] = '\0';
-			break;
-		}
-		else
-			i++;
-	}
-}
-
-/**
  * main - program that  Write a simple UNIX command interpreter.
  *
  * Return: 0.

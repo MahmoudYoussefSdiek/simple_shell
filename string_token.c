@@ -15,14 +15,17 @@ void string_token(char *str, char *delimiter, char *argv[])
 	char *first_ptr = NULL;
 	char *second_ptr = NULL;
 	int argc = 0;
+	int len;
 
 	if (str != NULL)
-		first_ptr = str;
-
-	while (*first_ptr && *first_ptr == ' ')
 	{
-		first_ptr++;
+		len = _strlen(str);
+		while (len > 0 && str[len - 1] == ' ')
+			str[--len] = '\0';
 	}
+	first_ptr = str;
+	while (*first_ptr && *first_ptr == ' ')
+		first_ptr++;
 
 	second_ptr = first_ptr;
 
@@ -35,7 +38,7 @@ void string_token(char *str, char *delimiter, char *argv[])
 				first_ptr++;
 			argv[argc++] = second_ptr;
 			second_ptr = first_ptr + 1;
-			if (argc >= MAX_INPUT_LENGTH)
+			if (argc >= MAXARGS)
 				break;
 		}
 		first_ptr++;
