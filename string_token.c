@@ -31,7 +31,7 @@ void string_token(char *str, char *delimiter, char *argv[])
 
 	while (*first_ptr != '\0')
 	{
-		if (*first_ptr == *delimiter)
+		if (_strcmp(first_ptr, delimiter) == 0)
 		{
 			*first_ptr = '\0';
 			while (*(first_ptr + 1) == ' ')

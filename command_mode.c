@@ -15,28 +15,38 @@ void non_interactive_mode(char *input_buffer,
 {
 	int id;
 	int bytes;
+	char *command;
+	char *multi_line[MAXARGS];
 
 	bytes = read(STDIN_FILENO, input_buffer, MAX_INPUT_LENGTH);
 	if (input_buffer[bytes - 1] == '\n')
 		input_buffer[bytes - 1] = '\0';
 
-	string_token(input_buffer, " ", argv_buffer);
-	add_bin_prefix(argv_buffer, new_arg);
+	string_token(input_buffer, "\n", argv_buffer);
+	command = argv_buffer[0];
+	while (command != NULL)
+	{
+		string_token(command, " ", multi_line);
+		built_in_command(multi_line);
+		add_bin_prefix(multi_line, new_arg);
 
-	id = fork();
-	if (id == -1)
-	{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
+		id = fork();
+		if (id == -1)
+		{
+			perror("fork failed");
+			exit(EXIT_FAILURE);
+		}
+		else if (id == 0)
+		{
+			execve(multi_line[0], multi_line, NULL);
+			perror(multi_line[0]);
+			exit(EXIT_FAILURE);
+		}
+		else
+			wait(NULL);
+
+		command = *(++argv_buffer);
 	}
-	else if (id == 0)
-	{
-		execve(argv_buffer[0], argv_buffer, NULL);
-		perror(argv_buffer[0]);
-		exit(EXIT_FAILURE);
-	}
-	else
-		wait(NULL);
 }
 
 /**
@@ -70,10 +80,10 @@ void interactive_mode(int bytes, int id,
 			break;
 		}
 		if (input_buffer[bytes - 1] == '\n')
-			input_buffer[bytes - 1] = '\0';
+			input_buffer[bytes] = '\0';
 		string_token(input_buffer, " ", argv_buffer);
 		if (argv_buffer[0] == NULL || *argv_buffer[0] == '\0'
-									|| *argv_buffer[0] == ' ')
+				|| *argv_buffer[0] == ' ')
 			continue;
 		built_in_command(argv_buffer);
 		add_bin_prefix(argv_buffer, new_arg);
