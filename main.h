@@ -4,6 +4,8 @@
 #define MAX_INPUT_LENGTH 1024
 #define MAXARGS 128
 
+extern char **environ;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,6 +25,7 @@ void interactive_mode(int bytes, int id,
 void non_interactive_mode(char *input_buffer,
 		char *argv_buffer[], char *new_arg);
 
+int built_in_command(char **argv);
 
 int _strlen(char *s);
 void _strncpy(char *dest, char *src, int n);
