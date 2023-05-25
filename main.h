@@ -15,6 +15,7 @@ extern char **environ;
 #include <fcntl.h>
 #include <dirent.h>
 #include <signal.h>
+#include <limits.h>
 
 
 void string_token(char *str, char *delimiter, char *argv[]);
@@ -30,5 +31,6 @@ int built_in_command(char **argv);
 int _strlen(char *s);
 void _strncpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
+int _atoi(char *s);
 
 #endif

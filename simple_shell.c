@@ -33,10 +33,15 @@ int main(void)
 int built_in_command(char **argv)
 {
 	char **envp;
+	int exit_status;
 
 	if (_strcmp(argv[0], "exit") == 0)
 	{
-		exit(EXIT_SUCCESS);
+		exit_status = EXIT_SUCCESS;
+		if (argv[1] != NULL)
+			exit_status = _atoi(argv[1]);
+
+		exit(exit_status);
 	}
 	if (_strcmp(argv[0], "env") == 0)
 	{
