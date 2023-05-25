@@ -20,7 +20,8 @@ void add_bin_prefix(char *argv[], char *new_arg)
 	prefix_len = _strlen(prefix_path);
 	arg_len = _strlen(argv[0]);
 
-	if (_strcmp(argv[0], prefix_path) == 0 || _strcmp(argv[0], "./") == 0)
+	if (_strcmp(argv[0], prefix_path) == 0 || _strcmp(argv[0], "./") == 0
+			|| _strcmp(argv[0], "../") == 0)
 		return;
 
 	_strncpy(new_arg, prefix_path, prefix_len);
