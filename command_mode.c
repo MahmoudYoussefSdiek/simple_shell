@@ -80,7 +80,7 @@ void interactive_mode(int bytes, int id,
 			break;
 		}
 		if (input_buffer[bytes - 1] == '\n')
-			input_buffer[bytes] = '\0';
+			input_buffer[bytes - 1] = '\0';
 		string_token(input_buffer, " ", argv_buffer);
 		if (argv_buffer[0] == NULL || *argv_buffer[0] == '\0'
 				|| *argv_buffer[0] == ' ')
