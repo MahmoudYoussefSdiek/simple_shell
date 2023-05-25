@@ -72,11 +72,11 @@ void interactive_mode(int bytes, int id,
 		if (input_buffer[bytes - 1] == '\n')
 			input_buffer[bytes - 1] = '\0';
 		string_token(input_buffer, " ", argv_buffer);
-		built_in_command(argv_buffer);
-		add_bin_prefix(argv_buffer, new_arg);
 		if (argv_buffer[0] == NULL || *argv_buffer[0] == '\0'
 									|| *argv_buffer[0] == ' ')
 			continue;
+		built_in_command(argv_buffer);
+		add_bin_prefix(argv_buffer, new_arg);
 		id = fork();
 		if (id == -1)
 		{
