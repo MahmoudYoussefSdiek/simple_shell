@@ -7,18 +7,18 @@
  */
 int main(void)
 {
-	pid_t id = 0;
 	ssize_t bytes = 0;
 	char input_buffer[MAX_INPUT_LENGTH];
 	char new_arg[20];
+	char *multi_command[MAXARGS];
 	char *argv_buffer[MAXARGS];
 
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		interactive_mode(bytes, id, input_buffer, argv_buffer, new_arg);
+		interactive_mode(bytes, input_buffer, argv_buffer, new_arg);
 	}
 	else
-		non_interactive_mode(input_buffer, argv_buffer, new_arg);
+		non_interactive_mode(input_buffer, multi_command, argv_buffer, new_arg);
 
 	return (0);
 }
@@ -43,9 +43,10 @@ int built_in_command(char **argv)
 			exit_status = _atoi(argv[1]);
 			if (exit_status < 0)
 				exit(EXIT_FAILURE);
-			 exit(exit_status);
+			exit(exit_status);
 		}
 		exit(exit_status);
+
 	}
 	if (_strcmp(argv[0], "env") == 0)
 	{
